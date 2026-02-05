@@ -155,14 +155,17 @@ export default function Home() {
                 className="bg-white rounded-lg shadow-sm border border-zinc-200 p-6"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-zinc-900">
+                  <Link
+                    href={`/equipment/${item.id}`}
+                    className="flex-1 group"
+                  >
+                    <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-blue-600 transition-colors">
                       {item.name}
                     </h3>
                     <p className="text-sm text-zinc-600 mt-1">
-                      Current Hours: {item.hours.toLocaleString()} hrs
+                      Current Hours: {Number(item.hours).toLocaleString()} hrs
                     </p>
-                  </div>
+                  </Link>
                   <div className="flex gap-3">
                     <input
                       type="number"

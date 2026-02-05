@@ -14,4 +14,12 @@ export async function initializeDb() {
       created_at TIMESTAMP DEFAULT NOW()
     )
   `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS notes (
+      id SERIAL PRIMARY KEY,
+      equipment_id INTEGER NOT NULL REFERENCES equipment(id),
+      content TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `;
 }
