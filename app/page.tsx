@@ -97,7 +97,7 @@ export default function Home() {
           </h1>
           <button
             onClick={() => setShowAddForm(true)}
-            className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 transition-colors"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
           >
             Add Equipment
           </button>
@@ -115,11 +115,11 @@ export default function Home() {
                 onChange={(e) => setNewEquipmentName(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && addEquipment()}
                 placeholder="Equipment name"
-                className="flex-1 rounded-lg border border-zinc-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900"
+                className="flex-1 rounded-lg border border-zinc-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
               <button
                 onClick={addEquipment}
-                className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 transition-colors"
+                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
               >
                 Add
               </button>
@@ -170,11 +170,11 @@ export default function Home() {
                       }
                       onKeyDown={(e) => e.key === "Enter" && updateHours(item.id)}
                       placeholder="New hours"
-                      className="w-32 rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900"
+                      className="w-32 rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                     />
                     <button
                       onClick={() => updateHours(item.id)}
-                      className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 transition-colors"
+                      className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
                     >
                       Update
                     </button>
