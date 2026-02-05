@@ -15,33 +15,34 @@ export default function Home() {
   const [newEquipmentName, setNewEquipmentName] = useState("");
   const [updateValues, setUpdateValues] = useState<{ [key: string]: string }>({});
 
-  useEffect(() => {
-    const stored = localStorage.getItem("equipment");
-    if (stored) {
-      setEquipment(JSON.parse(stored));
+  const fetchEquipment = async () => {
+    const res = await fetch("/api/equipment");
+    if (res.ok) {
+      setEquipment(await res.json());
     }
+  };
+
+  useEffect(() => {
+    fetchEquipment();
   }, []);
 
-  const saveEquipment = (newEquipment: Equipment[]) => {
-    setEquipment(newEquipment);
-    localStorage.setItem("equipment", JSON.stringify(newEquipment));
-  };
-
-  const addEquipment = () => {
+  const addEquipment = async () => {
     if (!newEquipmentName.trim()) return;
 
-    const newItem: Equipment = {
-      id: Date.now().toString(),
-      name: newEquipmentName.trim(),
-      hours: 0,
-    };
+    const res = await fetch("/api/equipment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: newEquipmentName.trim() }),
+    });
 
-    saveEquipment([...equipment, newItem]);
-    setNewEquipmentName("");
-    setShowAddForm(false);
+    if (res.ok) {
+      await fetchEquipment();
+      setNewEquipmentName("");
+      setShowAddForm(false);
+    }
   };
 
-  const updateHours = (id: string) => {
+  const updateHours = async (id: string) => {
     const value = updateValues[id];
     if (!value) return;
 
@@ -59,12 +60,16 @@ export default function Home() {
       if (!confirmed) return;
     }
 
-    const updated = equipment.map((e) =>
-      e.id === id ? { ...e, hours: numericValue } : e
-    );
+    const res = await fetch(`/api/equipment/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hours: numericValue }),
+    });
 
-    saveEquipment(updated);
-    setUpdateValues({ ...updateValues, [id]: "" });
+    if (res.ok) {
+      await fetchEquipment();
+      setUpdateValues({ ...updateValues, [id]: "" });
+    }
   };
 
   return (
